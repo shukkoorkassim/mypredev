@@ -34,6 +34,6 @@ jobs:
 
           # Update TestRail Test Case to 'Passed' (or any other desired status)
           curl -X POST "$TESTRAIL_URL/index.php?/api/v2/add_result_for_case/$TESTRAIL_PROJECT_ID/$TESTCASE_ID" \
-            -u "$TESTRAIL_API_KEY" \
+            -u "username:$TESTRAIL_API_KEY" \
             -H "Content-Type: application/json" \
             -d "{\"status_id\": 1, \"comment\": \"Issue closed in GitHub: $GITHUB_ISSUE_URL\"}"
