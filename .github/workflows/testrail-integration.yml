@@ -1,0 +1,40 @@
+name: Update TestRail Test Case
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  update-testrail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Update TestRail Test Case
+        run: |
+          # Set variables
+          TESTRAIL_URL="https://ibm.testrail.io"
+          TESTRAIL_API_KEY="AgxXL24VaKQXh4AZEbZm-bEbGb2pEQYp90PcrJDlZ"
+          TESTRAIL_PROJECT_ID="387"
+          TESTRAIL_SUITE_ID="9342"
+          GITHUB_ISSUE_URL="${{ github.event.issue.html_url }}"
+
+          # Extract the TestRail Test Case ID from the GitHub Issue body (e.g., #123)
+          #ISSUE_BODY="${{ github.event.issue.body }}"
+          #TESTCASE_ID=$(echo "$ISSUE_BODY" | grep -oP "#\d+" | tr -d '#')
+
+          # Check if the Test Case ID exists
+          # if [ -z "$TESTCASE_ID" ]; then
+          #   echo "No TestCase ID found in issue body. Skipping update."
+          #   exit 0
+          # fi
+
+          TESTCASE_ID="2978925"
+
+
+          # Update TestRail Test Case to 'Passed' (or any other desired status)
+          curl -X POST "$TESTRAIL_URL/index.php?/api/v2/add_result_for_case/$TESTRAIL_PROJECT_ID/$TESTCASE_ID" \
+            -u "$TESTRAIL_API_KEY" \
+            -d "status_id=1"  # 1 is the ID for 'Passed' status
+            -d "comment=Issue closed in GitHub: $GITHUB_ISSUE_URL"
