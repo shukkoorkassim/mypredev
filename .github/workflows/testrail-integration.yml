@@ -15,28 +15,25 @@ jobs:
         run: |
           # Set variables
           TESTRAIL_URL="https://ibm.testrail.io"
-          TESTRAIL_API_KEY="AgxXL24VaKQXh4AZEbZm-bEbGb2pEQYp90PcrJDlZ"
+          TESTRAIL_API_KEY="AgxXL24VaKQXh4AZEbZm-bEbGb2pEQYp90PcrJDlZ"  # Use a GitHub secret for your API key
           TESTRAIL_PROJECT_ID="387"
           TESTRAIL_SUITE_ID="9342"
           GITHUB_ISSUE_URL="${{ github.event.issue.html_url }}"
 
           # Extract the TestRail Test Case ID from the GitHub Issue body (e.g., #123)
-          #ISSUE_BODY="${{ github.event.issue.body }}"
-          #TESTCASE_ID=$(echo "$ISSUE_BODY" | grep -oP "#\d+" | tr -d '#')
+          # ISSUE_BODY="${{ github.event.issue.body }}"
+          # TESTCASE_ID=$(echo "$ISSUE_BODY" | grep -oP "#\d+" | tr -d '#')
 
           # Check if the Test Case ID exists
           # if [ -z "$TESTCASE_ID" ]; then
           #   echo "No TestCase ID found in issue body. Skipping update."
           #   exit 0
           # fi
-
-          TESTCASE_ID="21852725"
-
+          TESTCASE_ID ="21852725"
+          echo "Updating TestRail Test Case ID: $TESTCASE_ID"
 
           # Update TestRail Test Case to 'Passed' (or any other desired status)
           curl -X POST "$TESTRAIL_URL/index.php?/api/v2/add_result_for_case/$TESTRAIL_PROJECT_ID/$TESTCASE_ID" \
             -u "$TESTRAIL_API_KEY" \
             -H "Content-Type: application/json" \
-            -d "status_id=1"  # 1 is the ID for 'Passed' status
-            -d "comment=Issue closed in GitHub: $GITHUB_ISSUE_URL"
-            
+            -d "{\"status_id\": 1, \"comment\": \"Issue closed in GitHub: $GITHUB_ISSUE_URL\"}"
