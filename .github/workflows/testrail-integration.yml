@@ -14,7 +14,7 @@ jobs:
       - name: Update TestRail Test Case
         run: |
           # Set variables
-          TESTRAIL_URL="https://ibm.testrail.io"  # Make sure no trailing slash
+          TESTRAIL_URL="https://ibm.testrail.io"  # Ensure no trailing slash
           TESTRAIL_API_KEY="AgxXL24VaKQXh4AZEbZm-bEbGb2pEQYp90PcrJDlZ"
           TESTRAIL_USERNAME="shukkoor@ibm.com"  # Use a GitHub secret for your username
           TESTRAIL_PROJECT_ID="387"
@@ -30,7 +30,7 @@ jobs:
           # Define the authentication
           AUTH="$TESTRAIL_USERNAME:$TESTRAIL_API_KEY"
 
-          # Define the data to send in the request
+          # Define the data to send in the request (JSON payload)
           DATA="{\"status_id\": $TESTRAIL_STATUS_ID, \"comment\": \"Issue closed in GitHub: $GITHUB_ISSUE_URL\", \"custom_custom_automationid\": \"100\"}"
 
           # Debugging Output: Print the URL, auth, and data
@@ -38,8 +38,15 @@ jobs:
           echo "Auth: $AUTH"
           echo "Data: $DATA"
 
+          # Ensure that the URL is properly formatted, including query parameters
+          URL="$TESTRAIL_URL/index.php?/api/v2/add_result_for_case/$TESTRAIL_RUN_ID/$TESTCASE_ID"
+
+          # Print the full curl command for debugging
+          echo "Executing curl command:"
+          echo curl -X POST "$URL" -u "$AUTH" -H "Content-Type: application/json" -d "$DATA"
+
           # Update TestRail Test Case to 'Passed' (or any other desired status)
-          curl -X POST "$TESTRAIL_URL/index.php?/api/v2/add_result_for_case/$TESTRAIL_RUN_ID/$TESTCASE_ID" \
-            -u "$AUTH" \  # Use username and API key for authentication
-            -H "Content-Type: application/json" \  # Ensure the correct content type header is set
+          curl -X POST "$URL" \
+            -u "$AUTH" \
+            -H "Content-Type: application/json" \
             -d "$DATA"
