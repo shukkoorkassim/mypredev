@@ -18,6 +18,7 @@ jobs:
           TESTRAIL_API_KEY="AgxXL24VaKQXh4AZEbZm-bEbGb2pEQYp90PcrJDlZ"  # Use a GitHub secret for your API key
           TESTRAIL_PROJECT_ID="387"
           TESTRAIL_SUITE_ID="9342"
+          TESTRAIL_USERNAME="shukkoorkassim@gmail.com"
           GITHUB_ISSUE_URL="${{ github.event.issue.html_url }}"
 
           # Extract the TestRail Test Case ID from the GitHub Issue body (e.g., #123)
@@ -34,6 +35,6 @@ jobs:
 
           # Update TestRail Test Case to 'Passed' (or any other desired status)
           curl -X POST "$TESTRAIL_URL/index.php?/api/v2/add_result_for_case/$TESTRAIL_PROJECT_ID/$TESTCASE_ID" \
-            -u "username:$TESTRAIL_API_KEY" \
+            -u "$TESTRAIL_USERNAME:$TESTRAIL_API_KEY" \
             -H "Content-Type: application/json" \
             -d "{\"status_id\": 1, \"comment\": \"Issue closed in GitHub: $GITHUB_ISSUE_URL\"}"
