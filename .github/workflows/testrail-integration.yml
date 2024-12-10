@@ -29,7 +29,7 @@ jobs:
           #   echo "No TestCase ID found in issue body. Skipping update."
           #   exit 0
           # fi
-          TESTCASE_ID ="21852725"
+          TESTCASE_ID="21852725"
           echo "Updating TestRail Test Case ID: $TESTCASE_ID"
 
           # Update TestRail Test Case to 'Passed' (or any other desired status)
