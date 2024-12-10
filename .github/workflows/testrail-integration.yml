@@ -41,5 +41,5 @@ jobs:
           # Update TestRail Test Case to 'Passed' (or any other desired status)
           curl -X POST "$TESTRAIL_URL/index.php?/api/v2/add_result_for_case/$TESTRAIL_RUN_ID/$TESTCASE_ID" \
             -u "$AUTH" \  # Use username and API key for authentication
-            -H "Content-Type: application/json" \
+            -H "Content-Type: application/json" \  # Ensure the correct content type header is set
             -d "$DATA"
