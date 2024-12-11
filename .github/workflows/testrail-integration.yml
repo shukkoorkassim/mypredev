@@ -31,11 +31,11 @@ jobs:
           TEST_RAIL_CASE_ID=$(echo "$ISSUE_TITLE" | grep -oP '\[\K\d+(?=\])')
           echo "$TEST_RAIL_CASE_ID"
 
-          # Check if the Test Case ID exists
-          if [ -z "$TESTCASE_ID1" ]; then
-            echo "No TestCase ID found in issue body. Skipping update."
-            exit 0
-          fi
+          # # Check if the Test Case ID exists
+          # if [ -z "$TESTCASE_ID1" ]; then
+          #   echo "No TestCase ID found in issue body. Skipping update."
+          #   exit 0
+          # fi
           
           echo "Updating TestRail Test Case ID: $TESTCASE_ID"
           echo "Updating TestRail Test Case ID: $TESTCASE_ID1"
