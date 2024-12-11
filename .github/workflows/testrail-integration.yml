@@ -30,6 +30,7 @@ jobs:
           echo "issue title: $ISSUE_TITLE"
           TEST_RAIL_CASE_ID=$(echo "$ISSUE_TITLE" | grep -oP '\[\K\d+(?=\])')
           echo "$TEST_RAIL_CASE_ID"
+          TESTCASE_ID=TEST_RAIL_CASE_ID
 
           # # Check if the Test Case ID exists
           # if [ -z "$TESTCASE_ID1" ]; then
