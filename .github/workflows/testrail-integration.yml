@@ -25,7 +25,8 @@ jobs:
 
           # Hardcoded Test Case ID for now
           TESTCASE_ID="2984095"
-
+          
+          echo "issue body: $ISSUE_BODY"
           TESTCASE_ID1=$(echo "$ISSUE_BODY" | grep -oP "#\d+" | tr -d '#')
 
           # Check if the Test Case ID exists
