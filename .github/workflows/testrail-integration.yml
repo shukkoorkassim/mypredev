@@ -25,7 +25,17 @@ jobs:
 
           # Hardcoded Test Case ID for now
           TESTCASE_ID="2984095"
+
+          TESTCASE_ID1=$(echo "$ISSUE_BODY" | grep -oP "#\d+" | tr -d '#')
+
+          # Check if the Test Case ID exists
+          if [ -z "$TESTCASE_ID1" ]; then
+            echo "No TestCase ID found in issue body. Skipping update."
+            exit 0
+          fi
+          
           echo "Updating TestRail Test Case ID: $TESTCASE_ID"
+          echo "Updating TestRail Test Case ID: $TESTCASE_ID1"
 
           # Define the authentication
           AUTH="$TESTRAIL_USERNAME:$TESTRAIL_API_KEY"
