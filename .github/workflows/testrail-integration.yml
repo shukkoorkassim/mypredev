@@ -19,12 +19,12 @@ jobs:
           TESTRAIL_USERNAME="shukkoor@ibm.com"  # Use a GitHub secret for your username
           TESTRAIL_PROJECT_ID="387"
           TESTRAIL_SUITE_ID="9342"
-          TESTRAIL_RUN_ID="133455"
+          TESTRAIL_RUN_ID="133457"
           TESTRAIL_STATUS_ID="1"  # '1' for Passed status
           GITHUB_ISSUE_URL="${{ github.event.issue.html_url }}"
 
           # Hardcoded Test Case ID for now
-          TESTCASE_ID="21884557"
+          TESTCASE_ID="2984095"
           echo "Updating TestRail Test Case ID: $TESTCASE_ID"
 
           # Define the authentication
