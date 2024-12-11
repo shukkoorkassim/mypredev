@@ -30,7 +30,7 @@ jobs:
           echo "issue title: $ISSUE_TITLE"
           TEST_RAIL_CASE_ID=$(echo "$ISSUE_TITLE" | grep -oP '\[\K\d+(?=\])')
           echo "$TEST_RAIL_CASE_ID"
-          TESTCASE_ID=TEST_RAIL_CASE_ID
+          TESTCASE_ID="$TEST_RAIL_CASE_ID"
 
           # # Check if the Test Case ID exists
           # if [ -z "$TESTCASE_ID1" ]; then
@@ -39,7 +39,7 @@ jobs:
           # fi
           
           echo "Updating TestRail Test Case ID: $TESTCASE_ID"
-          echo "Updating TestRail Test Case ID: $TESTCASE_ID1"
+        
 
           # Define the authentication
           AUTH="$TESTRAIL_USERNAME:$TESTRAIL_API_KEY"
