@@ -28,7 +28,8 @@ jobs:
 
           ISSUE_TITLE="${{ github.event.issue.title }}"
           echo "issue title: $ISSUE_TITLE"
-          TESTCASE_ID1=$(echo "$ISSUE_BODY" | grep -oP "#\d+" | tr -d '#')
+          TEST_RAIL_CASE_ID=$(echo "$ISSUE_TITLE" | grep -oP '\[\K\d+(?=\])')
+          echo "$TEST_RAIL_CASE_ID"
 
           # Check if the Test Case ID exists
           if [ -z "$TESTCASE_ID1" ]; then
